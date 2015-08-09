@@ -73,13 +73,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "dev" do |dev|
-    dev.vm.provider "docker" do |docker|
-      docker.vagrant_vagrantfile = __FILE__
-      docker.image               = "mgood/resolvable"
-      docker.name                = "resolvable"
-      docker.volumes             = ["/var/run/docker.sock:/tmp/docker.sock"]
-      docker.ports               = ["53/udp:53/udp"]
-      docker.remains_running     = true
+    dev.vm.provider "docker" do |dns|
+      dns.vagrant_vagrantfile = __FILE__
+      dns.image               = "mgood/resolvable"
+      dns.name                = "resolvable"
+      dns.volumes             = ["/var/run/docker.sock:/tmp/docker.sock"]
+      dns.ports               = ["53/udp:53/udp"]
+      dns.remains_running     = true
     end
   end
 
