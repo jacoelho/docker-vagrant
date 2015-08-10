@@ -12,8 +12,7 @@ $vm_ip      = "192.168.10.10"
 ROOT = File.dirname(File.absolute_path(__FILE__))
 VAGRANTFILE_API_VERSION = '2'
 
-required_plugins = %w(vagrant-triggers)
-required_plugins.each do |plugin|
+%w(vagrant-triggers).each do |plugin|
   unless Vagrant.has_plugin? plugin
     system "vagrant plugin install #{plugin}"
   end
