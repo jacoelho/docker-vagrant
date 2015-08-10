@@ -1,6 +1,3 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 # Settings
 
 $vm_gui     = false
@@ -46,7 +43,7 @@ EOF
 
     default.vm.provider "virtualbox" do |v|
       v.gui    = $vm_gui
-      v.name   = "vagrant_boot2docker"
+      v.name   = "dev-machine"
       v.cpus   = $vm_cpus
       v.memory = $vm_memory
 
@@ -68,7 +65,7 @@ EOF
       system <<-EOF
         sudo route add -net 172.17.0.0/16 #{$vm_ip}
         sudo mkdir -p /etc/resolver
-        echo "nameserver #{$vm_ip}" | sudo tee /etc/resolver/docker
+        echo -e "nameserver #{$vm_ip}\n" | sudo tee /etc/resolver/docker
       EOF
     end
 
@@ -91,3 +88,6 @@ EOF
   end
 
 end
+
+# -*- mode: ruby -*-
+# # vim: set ft=ruby ts=2 sw=2 tw=0 et
