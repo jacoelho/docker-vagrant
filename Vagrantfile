@@ -22,6 +22,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "default", autostart: false do |default|
     default.vm.define "boot2docker"
     default.vm.box = "boxcutter/ubuntu1404-docker"
+    default.vm.post_up_message = <<-EOF
+Congratulations! Your machine is up and running.
+Make sure you have the following variable set to use docker:
+  export DOCKER_HOST='tcp://localhost:2375'
+
+All your containers are accessible using <container_name>.docker
+EOF
 
     default.vm.network "private_network", ip: $vm_ip , nic_type: "82545EM"
     # Forward the Docker port
@@ -55,6 +62,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         sudo service docker restart
       EOF
     end
+
 
     default.trigger.after [:provision, :up, :reload] do
       system <<-EOF
